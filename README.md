@@ -7,14 +7,14 @@ POST /auth/register
 
 功能：用户注册
 
-####提交参数
+#### 提交参数
 
 * 参数类型：Content-Type: application/x-www-form-urlencoded;charset=utf-8
 * 参数字段:
     * username:用户名，长度1到15个字符，只能是字母、数字、下划线，中文。
     * password:密码，长度6-16个任意字符
     
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -35,7 +35,7 @@ POST /auth/register
       }
     }
 ```
-####测试
+#### 测试
 ```
 curl -d "username=username&password=123456" -X POST "http://127.0.0.1:3000/register"
 ```
@@ -46,14 +46,14 @@ POST /auth/login
 
 功能：用户登录
 
-####提交参数
+#### 提交参数
 
 * 参数类型：Content-Type: application/x-www-form-urlencoded;charset=utf-8
 * 参数字段:
     * username:用户名，长度1到15个字符，只能是字母、数字、下划线，中文。
     * password:密码，长度6-16个任意字符
     
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -70,24 +70,24 @@ POST /auth/login
       
     }
 ```
-####测试
+#### 测试
 ```
 curl -d "username=username&password=123456" "http://127.0.0.1:3000/login"
 ```
 --------------------------
 
-###记录相关
+### 记录相关
 GET/records
 
 功能:获取计算记录列表
 
-####提交参数
+#### 提交参数
 
 * 参数字段:
     * page:页码，不传默认为1。如果设置，则获取第page页的计算记录列表
     * userId：用户id
     
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -112,7 +112,7 @@ GET/records
       "total": 222 //该用户全部计算记录的总数
      }
 ```
-####测试
+#### 测试
 ```
 curl "http://127.0.0.1:3000/records/records?page=1&userId=1"
 ```
@@ -122,9 +122,9 @@ GET/records/details
 
 功能:获取对应id的计算记录详情
 
-####提交参数
+#### 提交参数
 recordID,计算记录在数据表中的ID
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -153,7 +153,7 @@ POST/records/deleteRecord
 
 功能:删除对应id的计算记录
 
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -175,7 +175,7 @@ POST/create-record
 
 功能:创建新的计算记录
 
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -197,7 +197,7 @@ POST/update-record
 
 功能:更新计算记录
 
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
@@ -219,7 +219,7 @@ POST/calculate
 
 功能:根据传送的表达式计算
 
-####返回数据
+#### 返回数据
 * 失败
     * 返回格式
     
