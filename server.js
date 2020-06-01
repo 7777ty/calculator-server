@@ -28,8 +28,8 @@ app.post('/auth/login',function (req, res) {
                 msg: '登陆成功',
             })
         } else {
-
             res.send({
+                code:1,
                 msg: '账户名或密码错误'
             })
         }
@@ -152,7 +152,7 @@ app.post('/auth/register', function (req, res) {
 
                  });
              }else{
-                 db.query('SELECT * FROM records where user =  ? LIMIT 10,?;',[req.query.username,req.query.page*10],(err,ret)=>{
+                 db.query('SELECT * FROM records where user =  ? LIMIT ?,10;',[req.query.username,(req.query.page-1)*10],(err,ret)=>{
                      if(ret){
                          res.send({code:0,ret,total})
                      }

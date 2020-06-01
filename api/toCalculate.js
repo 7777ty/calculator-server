@@ -24,7 +24,7 @@ var onComputed =function(expression) {
                     break
                 }
                 case '*':{
-                    sum=number1*number2;
+                    sum=parseFloat((number1*number2).toFixed(10));
                     publicVariable.numberStack.push(sum);
                     break
                 }
