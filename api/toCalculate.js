@@ -1,9 +1,14 @@
 
-
+const toRPlish=require('./toRPolish');
 const publicConstant =require('../helper/constant');
 const publicVariable =require('../helper/variable');
 
 var onComputed =function(expression) {
+    console.log('1111');
+    console.log(expression);
+    expression=toRPlish(expression);
+    console.log('2222');
+    console.log(expression);
     let result='';
     expression.forEach((e)=>{
         if(!(publicConstant.operatorString.includes(e))){
@@ -54,11 +59,7 @@ var onComputed =function(expression) {
         }
     });
     result=publicVariable.numberStack.pop();
-    if (this.result){
-        this.currentOutput=this.result.toString();
-    }else{
-        this.currentOutput='0';
-    }
+
     publicVariable.suffixExpression=[];
     return result
 }

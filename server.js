@@ -18,11 +18,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.post('/auth/login',function (req, res) {
     db.query('SELECT * FROM users where name =  ? and psw=?;',[req.body.username,req.body.password],(err,ret)=>{
-
         if (err) { throw err }
         if (ret.length > 0) {
             res.cookie('name',ret[0].name);
-            console.log(ret[0]);
             res.send({
                 code: 0,
                 msg: '登陆成功',
@@ -33,10 +31,7 @@ app.post('/auth/login',function (req, res) {
                 msg: '账户名或密码错误'
             })
         }
-
     })
-
-
 });
 app.post('/auth/register', function (req, res) {
     db.query('insert into users (name,psw) values (?,?)',[req.body.username,req.body.password],(err,ret)=>{
@@ -60,7 +55,7 @@ app.post('/auth/register', function (req, res) {
 });
  app.post('/calculate', function (req, res) {
      try {
-         onComputed(req.body);
+         onComputed(req.body.expression);
      }catch (err) {
          switch (err.message) {
              case '除数为0':{
@@ -77,7 +72,7 @@ app.post('/auth/register', function (req, res) {
              }
          }
      }
-     const result=onComputed(req.body);
+     const result=onComputed(req.body.expression);
      res.send({code:0,result})
  });
  app.post('/create-record', function (req, res) {
@@ -124,7 +119,6 @@ app.post('/auth/register', function (req, res) {
              }
          }
          if (ret) {
-             console.log(ret);
              if (ret.affectedRows > 0) {
                  res.send({
                      code: 0,
@@ -137,7 +131,6 @@ app.post('/auth/register', function (req, res) {
 
  });
  app.get('/records', function (req, res) {
-     console.log(req.query);
      db.query('SELECT count(*) AS total FROM records where user =  ?;',[req.query.username],(err,ret)=>{
          if(ret){
              const total =ret[0].total;
@@ -181,7 +174,6 @@ app.post('/auth/register', function (req, res) {
      })
  });
  app.post('/records/deleteRecord', function (req, res) {
-     console.log(req.body);
      db.query('delete from records where id= ?',[req.body.recordID],(err,ret)=>{
          if (ret) {
              if (ret.affectedRows > 0) {
@@ -208,8 +200,7 @@ app.post('/auth/register', function (req, res) {
      });
  });
  app.get('/records/details', function (req, res) {
-     console.log(req.query);
-     db.query('SELECT * FROM records where id =  ? LIMIT 10;',[req.query.recordID],(err,ret)=>{
+     db.query('SELECT * FROM records where id =  ?;',[req.query.recordID],(err,ret)=>{
          if(ret){
              res.send({code:0,ret})
          }
